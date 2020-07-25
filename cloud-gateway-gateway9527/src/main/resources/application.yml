@@ -1,0 +1,42 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+      routes:  # 路由
+        - id: payment_routh  # 路由id
+          #uri: http://localhost:8001 #真是路径
+          uri: lb://CLOUD-PROVIDER-SERVICE #真是路径
+          predicates: #断言
+            - Path=/payment/get/**
+            #- After=2020-07-25T11:30:08.910+08:00[Asia/Shanghai]
+#            - Cookie=username,zzyy
+        - id: payment_routh2
+          #uri: http://localhost:8001
+          uri: lb://CLOUD-PROVIDER-SERVICE #真是路径
+          predicates:
+             - Path=/payment/lb/**
+             #- Cookie=username,zzyy #key value
+             #- Header=X-Request-id,\d+ # 请求头要有X-Request-id属性且值为整数的正则表达式
+             #- Host=**.atguigu.com
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+    prefer-ip-address: true
+#    instance:
+#      instance-id: payment8002
+#      prefer-ip-address: true
+  client:
+    service-url:
+       register-with-eureka: true
+       fetch-registry: true
+       defaultZone: http://eureka7001.com:7001/eureka
+
+
+
+
