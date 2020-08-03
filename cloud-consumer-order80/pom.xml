@@ -12,10 +12,10 @@
     <artifactId>cloud-consumer-order80</artifactId>
     <dependencies>
         <!-- 包含了sleuth zipkin 数据链路追踪-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>-->
+        </dependency>
         <!--eureka client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

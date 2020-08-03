@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class MyConfig {
     @Bean
-    //@LoadBalanced
+    @LoadBalanced //不加不能直接使用服务名 CLOUD-PROVIDER-SERVICE
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }

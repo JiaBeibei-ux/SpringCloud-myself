@@ -8,15 +8,38 @@ spring:
     config:
       server:
         git:  # git地址
-          uri: git@github.com:JiaBeibei-ux/springcloud-config.git
+          uri: https://github.com/JiaBeibei-ux/cloud-config.git
+          force-pull: true
+          username: JiaBeibei-ux
+          password: jb199618
           #搜索目录
           search-paths:
             - springcloud-config
-      #读取主分支
+      #读取分支
       label: master
+      #消息总线
+#    bus:
+#      enabled: true
+#      trace:
+#        enabled: true
+   #rabbit相关配置
+  rabbitmq:
+    host: 172.16.17.200
+    port: 5672
+    username: guest
+    password: guest
+
 
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka7001.com:7001/eureka
-      #defaultZone: http://eureka7001.com:7001/eureka
+      defaultZone: http://localhost:7001/eureka #注册进eureka
+  instance:
+    prefer-ip-address: true
+
+#rabbitmq相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:  #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: bus-refresh  #凡是暴露监控、刷新的都要有actuator依赖，bus-refresh就是actuator的刷新操作
